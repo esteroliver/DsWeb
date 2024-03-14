@@ -15,5 +15,5 @@ class Alternativa(models.Model):
     votos = models.IntegerField(default=0)
     pergunta_ass = models.ForeignKey(Pergunta, on_delete=models.CASCADE)
     def __str__(self):
-        return self.texto
+        return '{} ({})'.format(self.texto, self.id)
 
