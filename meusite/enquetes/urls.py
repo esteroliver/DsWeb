@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    #enquetes - endereço (localhost:8000/enquetes)
-    #views.index - função que vai ser ativada nesse endereço
+    path('<int:pergunta_id>/', views.detalhes, name='detalhes'),
+    path('<int:pergunta_id>/votacao/', views.votacao, name='votação'),
+    path('<int:pergunta_id>/resultado/', views.resultado, name='resultado'),
 ]
