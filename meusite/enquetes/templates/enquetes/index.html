@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perguntas da enquete</title>
+</head>
+<body>
+    {% if lista_ult_perguntas %}
+    <ul>
+        {% for p in lista_ult_perguntas%}
+        <li><a href="/enquetes/{{ p.id }}">
+            {{ p.texto }}
+        </a></li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>Nenhuma pergunta disponível.</p>
+    {% endif %}
+</body>
+</html>
