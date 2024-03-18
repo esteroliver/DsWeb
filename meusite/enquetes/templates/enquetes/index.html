@@ -6,9 +6,9 @@
     <title>Perguntas da enquete</title>
 </head>
 <body>
-    {% if lista_ult_perguntas %}
+    {% if lista %}
     <ul>
-        {% for p in lista_ult_perguntas%}
+        {% for p in lista %}
         <li><a href="/enquetes/{{ p.id }}">
             {{ p.texto }}
         </a></li>

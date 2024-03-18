@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.template import loader
 from .models import Pergunta
 
 def index(request):
-    lista_ult_perguntas = Pergunta.objects.all()[:10]
-    output = '<br>'.join(p.texto for p in lista_ult_perguntas)
-    return HttpResponse(output)
+    lista_ult_perguntas = Pergunta.objects.all()
+    template = loader.get_template('enquetes/index.html')
+    contexto = {'lista': lista_ult_perguntas}
+    return HttpResponse(template.render(contexto, request))
 
 def detalhes(request, pergunta_id):
     resultado = "DETALHES da pergunta - %s"
