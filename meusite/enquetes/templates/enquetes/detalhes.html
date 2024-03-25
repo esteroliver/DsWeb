@@ -3,17 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perguntas da enquete</title>
+    <title>Alternativas da pergunta {{ pergunta.id }}</title>
 </head>
 <body>
     <h1>Aplicação de enquetes - Detalhes</h1>
     <h2>Pergunta - {{ pergunta.id }}</h2>
     <p>{{ pergunta.texto }}</p>
     <p>{{ pergunta.data_pub }}</p>
-    <ul>
-    {% for a in pergunta.alternativa_set.all %}
-        <li> {{ a.texto }}</li>
-    {% endfor %}
-    </ul>
+    <form action="{% url 'enquetes:votacao' pergunta.id}" method='post'> <!-- enquetes/../votacao -->
+    {% csrf_token %}
+        {% for alt in pergunta.alternativa_set.all %}
+            <input type='radio' name='voto' value='{{ alt.id }}' id='alt{{ forloop.counter }}'>
+            <label for='alt{{ forloop.counter }}'>
+                {{ alt.texto }}
+            </label>
+            <br>
+        {% endfor %}
+        <input type='submit' value='Registre o seu voto'>
+    </form>
 </body>
 </html>
