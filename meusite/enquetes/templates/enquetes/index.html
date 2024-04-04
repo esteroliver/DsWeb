@@ -13,7 +13,7 @@
     {% if lista %}
     <ul>
         {% for p in lista %}
-        <li><a href="/enquetes/{{ p.id }}">
+        <li><a href="{% url 'enquetes:detalhes' p.id %}">
             {{ p.texto }}
         </a></li>
         {% endfor %}

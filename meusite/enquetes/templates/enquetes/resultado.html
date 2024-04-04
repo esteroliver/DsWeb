@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perguntas da enquete</title>
+</head>
+<body>
+    <h1>Aplicação de Enquetes - Desenvolvimento Web 2024.1</h1>
+    <h2>Pergunta: {{pergunta.texto}}</h2>
+    <ul>
+        {% for alt in pergunta.alternativa_set.all %}
+        <li>
+            <p>
+                {{alt.texto}} => {{alt.votos}}
+            </p>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'enquetes:votacao' pergunta.id%}">Voltar</a>
+</body>
+</html>
