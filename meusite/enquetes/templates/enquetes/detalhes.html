@@ -13,7 +13,7 @@
     {% if error_message %}
         <p>Selecione uma alternativa.</p>
     {% endif %}
-    <form action="{% url 'enquetes:votacao' pergunta.id %}" method='post'> <!-- enquetes/../votacao -->
+    <form action="{% url 'enquetes:detalhes' pergunta.id %}" method='post'>
     {% csrf_token %}
         {% for alt in pergunta.alternativa_set.all %}
             <input type='radio' name='voto' value='{{ alt.id }}' id='alt{{ forloop.counter }}'>
