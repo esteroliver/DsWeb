@@ -3,8 +3,7 @@ from . import views
 
 app_name = 'enquetes'
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('<int:pergunta_id>/', views.detalhes, name='detalhes'),
-    path('<int:pergunta_id>/votacao/', views.votacao, name='votacao'),
-    path('<int:pergunta_id>/resultado/', views.resultado, name='resultado'),
+    path('', views.IndexView, name='index'),
+    path('<int:pk>/', views.DetalhesView, name='detalhes'),
+    path('<int:pk>/resultado/', views.ResultadoView, name='resultado'),
 ]
