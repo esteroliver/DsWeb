@@ -9,12 +9,14 @@ class IndexView(View):
         lista = Pergunta.objects.all()
         return render(request, 'enquetes/index.html', {'lista':lista})
 
-def detalhes(request, pergunta_id):
-    try:
-        pergunta = Pergunta.objects.get(pk=pergunta_id)
-    except Pergunta.DoesNotExist:
-        raise Http404('Pergunta não existe.')
-    return render(request, 'enquetes/detalhes.html', {'pergunta':pergunta})
+class DetalhesView(View):
+    def get(self, request, *args, **kwargs):
+        pergunta_id = args['pk']
+        try:
+            pergunta = Pergunta.objects.get(pk = pergunta_id)
+        except Pergunta.DoesNotExist:
+            raise Http404('Pergunta não existe.')
+        return render(request, 'enquetes/detalhes.html', {'pergunta':pergunta})
 
 def votacao(request, pergunta_id):
     try:
