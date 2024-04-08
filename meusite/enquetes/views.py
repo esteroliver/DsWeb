@@ -1,12 +1,13 @@
 from django.shortcuts import render
-from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect
 from .models import Pergunta, Alternativa
 from django.urls import reverse
+from django.views import View
 
-def index(request):
-    lista_ult_perguntas = Pergunta.objects.all()
-    contexto = {'lista': lista_ult_perguntas}
-    return render(request, 'enquetes/index.html', contexto)
+class IndexView(View):
+    def get(self, request, *args, **kwargs):
+        lista = Pergunta.objects.all()
+        return render(request, 'enquetes/index.html', {'lista':lista})
 
 def detalhes(request, pergunta_id):
     try:
