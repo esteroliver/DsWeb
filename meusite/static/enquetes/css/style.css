@@ -27,3 +27,11 @@ li a:visited{
     color: rgb(6, 28, 90);
     text-decoration: none;
 }
+
+div{
+    display: flex;
+}
+
+div img{
+    border-radius: 50%;
+}

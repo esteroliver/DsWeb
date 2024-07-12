@@ -10,15 +10,17 @@
 <body>
     <h1>Aplicação de Enquetes - Desenvolvimento Web 2024.1</h1>
     <h2>Perguntas</h2>
-    {% if lista %}
-    <ul>
-        {% for p in lista %}
-        <li><a href="{% url 'enquetes:detalhes' p.id %}">
-            {{ p.texto }}
-        </a></li>
-        {% endfor %}
-    </ul>
-    <img src="{%static 'enquetes/img/manel.jpg'%}" alt="">
+    <div>
+        {% if lista %}
+        <ul>
+            {% for p in lista %}
+            <li><a href="{% url 'enquetes:detalhes' p.id %}">
+                {{ p.texto }}
+            </a></li>
+            {% endfor %}
+        </ul>
+        <img src="{%static 'enquetes/img/manel.jpg'%}" alt="">
+    </div>
     {% else %}
     <p>Nenhuma pergunta disponível.</p>
     {% endif %}
