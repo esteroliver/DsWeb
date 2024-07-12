@@ -1,7 +1,9 @@
 li a{
     text-decoration: none;
+    color: black;
 }
 
 li a:visited{
     color: rgb(64, 134, 43);
+    text-decoration: none;
 }
