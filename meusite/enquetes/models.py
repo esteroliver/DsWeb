@@ -8,7 +8,8 @@ class Pergunta(models.Model):
     def __str__(self):
         return '{} ({})'.format(self.texto, self.id)
     def publicada_recentemente(self):
-        return self.data_pub >= timezone.now() - datetime.timedelta(days=1)
+        agora = timezone.now()
+        return agora - datetime.timedelta(days=1) <= self.data_pub <= agora
 
 class Alternativa(models.Model):
     texto = models.CharField(max_length=200)
