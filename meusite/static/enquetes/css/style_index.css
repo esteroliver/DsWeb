@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Jockey+One&family=Patua+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&family=Patua+One&display=swap');
+
+body{
+    margin: 0;
+    background-color: #F6F6F6;
+}
+header{
+    background-color: #01515C;
+    display: flex;
+    padding-left: 10px;
+}
+header h1{
+    color: #F0F1CF;
+    font-family: "Patua One", serif;
+    padding-left: 5px;
+}
+header img{
+    width: 3rem;
+    height: 3rem;
+    align-self: center;
+}
+

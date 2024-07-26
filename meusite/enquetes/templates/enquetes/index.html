@@ -4,25 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perguntas da enquete</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'enquetes/css/style.css'%}">
+    <title>Poolas | Perguntas</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'enquetes/css/style_index.css'%}">
 </head>
 <body>
-    <h1>Aplicação de Enquetes - Desenvolvimento Web 2024.1</h1>
-    <h2>Perguntas</h2>
-    <div>
+    <header>
+        <img src="{% static 'enquetes/img/coluna.png'%}">
+        <h1>poolas</h1>
+    </header>
+    <main>
+        <h2>Perguntas recentes</h2>
+        <div>
         {% if lista %}
         <ul>
             {% for p in lista %}
-            <li><a href="{% url 'enquetes:detalhes' p.id %}">
-                {{ p.texto }}
-            </a></li>
+            <li>
+                <div>
+                    <p class="texto">{{ p.texto }}</p>
+                    <button><a href="{% url 'enquetes:detalhes' p.id %}">Alternativas</a></button>
+                    <p class="data-pub">{{ p.data_pub }}</p>
+                </div>
+            </li>
             {% endfor %}
         </ul>
-        <img src="{%static 'enquetes/img/manel.jpg'%}" alt="">
+        {% else %}
+        <p>Nenhuma pergunta disponível.</p>
+        {% endif %}
     </div>
-    {% else %}
-    <p>Nenhuma pergunta disponível.</p>
-    {% endif %}
+    </main>
 </body>
 </html>

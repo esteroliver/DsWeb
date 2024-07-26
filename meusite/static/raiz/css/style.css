@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Jockey+One&family=Patua+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&family=Patua+One&display=swap');
+
+body{
+    margin: 0;
+    background-color: #F6F6F6;
+}
+header{
+    background-color: #01515C;
+    display: flex;
+    padding-left: 10px;
+}
+header h1{
+    color: #F0F1CF;
+    font-family: "Patua One", serif;
+    padding-left: 5px;
+}
+header img{
+    width: 3rem;
+    height: 3rem;
+    align-self: center;
+}
+main{
+    display: flex;
+    justify-content: space-between;
+    padding-left:2rem;
+    padding-right: 2rem;
+    height: 52rem;
+}
+
+main div{
+    font-family: "Istok Web", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2.5rem;
+    color: #333333;
+    align-self: center;
+    padding-left: 1.5rem;
+}
+main div p{
+    margin-bottom: 20px;
+}
+main div button{
+    border: none;
+    background-color: #01515C;
+    padding:1rem;
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
+}
+main div button a{
+    color: #F0F1CF;
+    text-decoration: none;
+}
+
+main img{
+    align-self: end;
+}
+
+footer{
+    background-color: #01515C;
+    padding: 2rem;
+    padding-top: 2.5rem;
+}
+footer p{
+    color: #F0F1CF;
+    font-family: "Istok Web", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.2rem;
+}
