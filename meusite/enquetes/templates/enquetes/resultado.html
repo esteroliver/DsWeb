@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perguntas da enquete</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'enquetes/style_resultados.css'%}">
 </head>
 <body>
-    <h1>Aplicação de Enquetes - Desenvolvimento Web 2024.1</h1>
-    <h2>Pergunta: {{pergunta.texto}}</h2>
-    <ul>
-        {% for alt in pergunta.alternativa_set.all %}
-        <li>
-            <p>
-                {{alt.texto}} => {{alt.votos}}
-            </p>
-        </li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'enquetes:detalhes' pergunta.id%}">Voltar</a>
+    <header>
+        <img src="{% static 'enquetes/img/coluna.png'%}">
+        <h1>poolas</h1>
+    </header>
+    <main>
+        <p class="voltar"><a href="{% url 'enquetes:index'%}">Perguntas recentes</a> ><a href="{% url 'enquetes:detalhes' pergunta.id%}">{{pergunta.texto}}</a> </p>
+        <h2>Resultados: {{pergunta.texto}}</h2>
+        <ul>
+            {% for alt in pergunta.alternativa_set.all %}
+            <li>
+                <p>
+                    {{alt.texto}} - <strong>{{alt.votos}}</strong>
+                </p>
+            </li>
+            {% endfor %}
+        </ul>
+    </main>
 </body>
 </html>
