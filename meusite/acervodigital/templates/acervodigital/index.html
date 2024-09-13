@@ -1,0 +1,8 @@
+
+{% if request.user.is_authenticated %}
+    <h1>Bem-vindo ao seu acervo digital!</h1>
+    <a>logout</a>
+{% else %}
+    <a>login</a>
+    <a>cadastro</a>
+{% endif %}
