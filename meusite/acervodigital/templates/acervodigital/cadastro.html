@@ -9,5 +9,6 @@
     <form action="{% url 'cadastro' %}" method="post">
         {% csrf_token %}
         {{ formulario }}
+        <input type="submit" value="Cadastrar-se">
     </form>
 </body>

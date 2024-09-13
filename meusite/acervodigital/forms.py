@@ -5,3 +5,6 @@ class CadastroForm(forms.Form):
     nome_user = forms.CharField(label='Nome de usuário', max_length=30)
     email = forms.EmailField(label='E-mail')
     senha = forms.CharField(label='Senha', max_length=50)
+
+class LoginForm(forms.Form):
+    
