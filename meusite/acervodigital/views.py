@@ -4,6 +4,7 @@ from .models import Livro, Usuario
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+from .forms import CadastroForm
 
 class LoginView(View):
     def get(self, request, *args, **kwargs):
@@ -22,31 +23,31 @@ class LoginView(View):
 
 class CadastroView(View):
     def get(self, request, *args, **kwargs):
-        return render(request, 'acervodigital/cadastro.html')
+        formulario = CadastroForm()
+        return render(request, 'acervodigital/cadastro.html', {'formulario': formulario})
 
     def post(self, request, *args, **kwargs):
-        email = request.POST['email']
-        senha = request.POST['senha']
-        nome = request.POST['nome']
-        username = request.POST['username']
-
-        if User.objects.filter(username=username).exists():
-            messages.error("Já existe um usuário com esse username")
-        elif User.objects.filter(email=email).exists():
-            messages.error("Já existe um usuário com esse email")
+        formulario = CadastroForm(request.POST)
+        if(formulario.is_valid()):
+            if User.objects.filter(username=username).exists():
+                messages.error("Já existe um usuário com esse username")
+            elif User.objects.filter(email=email).exists():
+                messages.error("Já existe um usuário com esse email")
+            else:
+                user = User.objects.create_user(
+                    username = username,
+                    email = email,
+                    first_name = nome,
+                    password = senha
+                )
+                user.save()
+                usuario = Usuario.objects.create(
+                    user = user
+                )
+                usuario.save()
+                return redirect('/login')
         else:
-            user = User.objects.create_user(
-                username = username,
-                email = email,
-                first_name = nome,
-                password = senha
-            )
-            user.save()
-            usuario = Usuario.objects.create(
-                user = user
-            )
-            usuario.save()
-            return redirect('/login')
+            return redirect('/')
 
 class IndexView(View):
     def get(self, request, *args, **kwargs):
