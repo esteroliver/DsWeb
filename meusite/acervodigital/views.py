@@ -29,16 +29,16 @@ class CadastroView(View):
     def post(self, request, *args, **kwargs):
         formulario = CadastroForm(request.POST)
         if(formulario.is_valid()):
-            if User.objects.filter(username=formulario.nome_user).exists():
+            if User.objects.filter(username=nome_user).exists():
                 messages.error("Já existe um usuário com esse username")
-            elif User.objects.filter(email=formulario.email).exists():
+            elif User.objects.filter(email=email).exists():
                 messages.error("Já existe um usuário com esse email")
             else:
                 user = User.objects.create_user(
-                    username = formulario.nome_user,
-                    email = formulario.email,
-                    first_name = formulario.nome,
-                    password = formulario.senha
+                    username = nome_user,
+                    email = email,
+                    first_name = nome,
+                    password = senha
                 )
                 user.save()
                 usuario = Usuario.objects.create(
