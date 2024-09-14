@@ -8,8 +8,7 @@
 <body>
     <form action="{% url 'login' %}" method="post">
         {% csrf_token %}
-        <input name="email" type="email" placeholder="Email" required>
-        <input name="senha" type="password" placeholder="Senha" required>
+        {{ formulario }}
         <input type="submit" value="Entrar">
     </form>
 </body>

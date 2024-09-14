@@ -1,8 +1,39 @@
 
 {% if request.user.is_authenticated %}
     <h1>Bem-vindo ao seu acervo digital!</h1>
-    <a>logout</a>
-{% else %}
-    <a>login</a>
-    <a>cadastro</a>
+    <a href="{% url 'login' %}">logout</a>
+    <form action="{% url 'index'%}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{formulario.as_p}}
+        <input type="submit" value="Cadastrar livro">
+    </form>
+    <div>
+        <h1>Livros disponíveis</h1>
+        {% if livros_disponiveis %}
+            {% for l in livros_disponiveis %}
+                <div>
+                    <img src="{{ l.capa.url }}">
+                    <p>{{ l.titulo }} - {{ l.autor }}</p>
+                    <p>Publicado em {{l.ano}}.</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Não há livros disponíveis.</p>
+        {% endif %}
+    </div>
+
+    <div>
+        <h1>Livros emprestados</h1>
+        {% if livros_emprestados %}
+            {% for l in livros_emprestados %}
+                <div>
+                    <p>{{ l.titulo }} - {{ l.autor }}</p>
+                    <p>Publicado em {{l.ano}}.</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Nenhum livro foi emprestado.</p>
+        {% endif %}
+    </div>
+
 {% endif %}

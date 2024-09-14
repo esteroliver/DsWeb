@@ -11,7 +11,7 @@ class Livro(models.Model):
     titulo = models.CharField(max_length=120)
     autor = models.CharField(max_length=120)
     ano = models.CharField(max_length=4)
-    capa = models.ImageField()
+    capa = models.ImageField(upload_to='capas/', blank=True, null=True)
     emprestado = models.BooleanField(default=False)
 
     def __str__(self):
