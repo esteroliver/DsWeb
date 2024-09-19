@@ -1,7 +1,8 @@
+{% extends 'acervodigital/base.html' %}
+
+{% block conteudo %}
 
 {% if request.user.is_authenticated %}
-    <h1>Bem-vindo ao seu acervo digital!</h1>
-    <a href="{% url 'login' %}">logout</a>
     <form action="{% url 'index'%}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{formulario.as_p}}
@@ -27,6 +28,7 @@
         {% if livros_emprestados %}
             {% for l in livros_emprestados %}
                 <div>
+                    <img src="{{ l.capa.url }}">
                     <p>{{ l.titulo }} - {{ l.autor }}</p>
                     <p>Publicado em {{l.ano}}.</p>
                 </div>
@@ -35,5 +37,6 @@
             <p>Nenhum livro foi emprestado.</p>
         {% endif %}
     </div>
-
 {% endif %}
+
+{% endblock %}

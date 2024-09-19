@@ -15,3 +15,7 @@ class AddLivroForm(forms.Form):
     autor = forms.CharField(label='Autor:', max_length=120)
     ano = forms.CharField(label='Ano:', max_length=4)
     capa = forms.FileField(label='Capa:', required=False)
+
+class AddContatoForm(forms.Form):
+    nome = forms.CharField(label='Nome:', max_length=120)
+    email = forms.EmailField(label='E-mail:')

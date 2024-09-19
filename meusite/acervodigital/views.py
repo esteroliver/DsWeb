@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from .models import Livro, Usuario
+from .models import Livro, Usuario, Contato, Emprestimo
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import CadastroForm, LoginForm, AddLivroForm
+from .forms import CadastroForm, LoginForm, AddLivroForm, AddContatoForm
 
 class LoginView(View):
     def get(self, request, *args, **kwargs):
@@ -62,8 +62,9 @@ class CadastroView(View):
 class IndexView(View):
     def get(self, request, *args, **kwargs):
         add_livro = AddLivroForm()
-        livros_disponiveis = Livro.objects.filter(emprestado=False)
-        livros_emprestados = Livro.objects.filter(emprestado=True)
+        user = request.user.usuario
+        livros_disponiveis = user.livro_set.filter(emprestado=False)
+        livros_emprestados = user.livro_set.filter(emprestado=True)
         contexto = {
             'livros_disponiveis': livros_disponiveis,
             'livros_emprestados': livros_emprestados,
@@ -82,20 +83,82 @@ class IndexView(View):
                 titulo = titulo,
                 autor = autor,
                 ano = ano,
-                capa = capa
+                capa = capa,
+                dono = request.user.usuario
             )
             livro.save()
+        return redirect('/acervodigital/index')
 
-            return redirect('/acervodigital/index')
-        else:
-            livros_disponiveis = Livro.objects.filter(emprestado=False)
-            livros_emprestados = Livro.objects.filter(emprestado=True)
-            contexto = {
-                'livros_disponiveis': livros_disponiveis,
-                'livros_emprestados': livros_emprestados,
-                'formulario': add_livro
+
+class ContatosView(View):
+    def get(self, request, *args, **kwargs):
+        add_contato = AddContatoForm()
+        user = request.user.usuario
+        contatos = user.contato_set.all()
+        contexto = {
+            'contatos': contatos,
+            'formulario': add_contato
             }
-            return render(request, 'acervodigital/index.html', contexto)
+        return render(request, 'acervodigital/contatos.html', contexto)
+    def post(self, request, *args, **kwargs):
+        add_contato = AddContatoForm(request.POST)
+        if add_contato.is_valid():
+            nome = add_contato.cleaned_data['nome']
+            email = add_contato.cleaned_data['email']
+
+            contato = Contato.objects.create(
+                nome = nome,
+                email = email,
+                usuario = request.user.usuario
+            )
+            contato.save()
+        return redirect('/acervodigital/contatos')
+
+class EmprestimosView(View):
+    def get(self, request, *args, **kwargs):
+        user = request.user.usuario
+        livros = user.livro_set.filter(emprestado=False)
+        contatos = user.contato_set.all()
+        emprestimos = user.emprestimo_set.all()
+        contexto = {
+            'livros': livros,
+            'contatos': contatos,
+            'emprestimos': emprestimos
+            }
+        return render(request, 'acervodigital/emprestimos.html', contexto)
+    def post(self, request, *args, **kwargs):
+        usuario = request.user.usuario
+        livro_id = request.POST.get('livro')
+        contato_id = request.POST.get('contato')
+        livro = Livro.objects.get(id=livro_id)
+        contato = Contato.objects.get(id=contato_id)
+
+        emprestimo = Emprestimo.objects.create(
+            usuario = usuario,
+            livro = livro,
+            contato = contato
+            )
+        emprestimo.save()
+
+        livro.emprestado = True
+        livro.save()
+        return redirect('/acervodigital/emprestimos')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

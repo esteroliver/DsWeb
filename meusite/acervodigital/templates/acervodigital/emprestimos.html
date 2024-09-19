@@ -1,0 +1,41 @@
+{% extends 'acervodigital/base.html' %}
+
+{% block conteudo %}
+
+{% if request.user.is_authenticated %}
+
+<h1>Fazer empréstimo</h1>
+<form action="{% url 'emprestimos' %}" method='post'>
+    {% csrf_token %}
+    <select name='livro'>
+        <option>Selecione</option>
+        {% for l in livros %}
+        <option value='{{l.id}}'>{{l.titulo}} - {{l.autor}}</option>
+        {% endfor %}
+    </select>
+
+    <select name='contato'>
+        <option>Selecione</option>
+        {% for c in contatos %}
+        <option value='{{c.id}}'>{{c.nome}}</option>
+        {% endfor %}
+    </select>
+
+    <input type='submit' value='Realizar empréstimo'>
+</form>
+
+{% for e in emprestimos %}
+<div>
+    <p>{{e.contato.nome}}</p>
+    <p>{{e.livro.titulo}}</p>
+    {% if e.devolvido %}
+        <p>Devolvido.</p>
+    {% else %}
+        <p>Não devolvido.</p>
+    {% endif %}
+</div>
+{% endfor %}
+
+{% endif %}
+
+{% endblock %}
