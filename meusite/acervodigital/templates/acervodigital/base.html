@@ -4,19 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css'%}">
-    <title>Acervo digital | {{request.user.username}}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'acervodigital/style_base.css'%}">
+    {% block head %}
+    {% endblock %}
+    <title>Minha Estante | {{request.user.username}}</title>
 </head>
 <body>
     <header>
-        <h1>Acervo Digital</h1>
+        <h1>Minha Estante</h1>
+        <nav>
+            <a href="{% url 'index' %}">Livros</a>
+            <a href="{% url 'contatos' %}">Contatos</a>
+            <a href="{% url 'emprestimos' %}">Empréstimos</a>
+            <a href="{% url 'login' %}">Logout</a>
+        </nav>
     </header>
-    <nav>
-        <a href="{% url 'index' %}">Livros</a>
-        <a href="{% url 'contatos' %}">Contatos</a>
-        <a href="{% url 'emprestimos' %}">Emprestar livro</a>
-        <a href="{% url 'login' %}">logout</a>
-    </nav>
+
     <main>
     {% block conteudo %}
     {% endblock %}

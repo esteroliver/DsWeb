@@ -1,41 +1,51 @@
 {% extends 'acervodigital/base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'acervodigital/style_index.css'%}">
+{% endblock %}
 
 {% block conteudo %}
 
 {% if request.user.is_authenticated %}
-    <form action="{% url 'index'%}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{formulario.as_p}}
-        <input type="submit" value="Cadastrar livro">
-    </form>
-    <div>
-        <h1>Livros disponíveis</h1>
-        {% if livros_disponiveis %}
-            {% for l in livros_disponiveis %}
-                <div>
-                    <img src="{{ l.capa.url }}">
-                    <p>{{ l.titulo }} - {{ l.autor }}</p>
-                    <p>Publicado em {{l.ano}}.</p>
-                </div>
-            {% endfor %}
-        {% else %}
-            <p>Não há livros disponíveis.</p>
-        {% endif %}
+    <div class="formulario">
+        <h1>Adicionar livro</h1>
+        <form action="{% url 'index'%}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{formulario.as_p}}
+            <input type="submit" value="Cadastrar livro">
+        </form>
     </div>
+    <div class="conteudo">
+        <div>
+            <h1>Livros disponíveis</h1>
+            {% if livros_disponiveis %}
+                {% for l in livros_disponiveis %}
+                    <div>
+                        <img src="{{ l.capa.url }}">
+                        <p>{{ l.titulo }} - {{ l.autor }}</p>
+                        <p>Publicado em {{l.ano}}.</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Não há livros disponíveis.</p>
+            {% endif %}
+        </div>
 
-    <div>
-        <h1>Livros emprestados</h1>
-        {% if livros_emprestados %}
-            {% for l in livros_emprestados %}
-                <div>
-                    <img src="{{ l.capa.url }}">
-                    <p>{{ l.titulo }} - {{ l.autor }}</p>
-                    <p>Publicado em {{l.ano}}.</p>
-                </div>
-            {% endfor %}
-        {% else %}
-            <p>Nenhum livro foi emprestado.</p>
-        {% endif %}
+        <div>
+            <h1>Livros emprestados</h1>
+            {% if livros_emprestados %}
+                {% for l in livros_emprestados %}
+                    <div>
+                        <img src="{{ l.capa.url }}">
+                        <p>{{ l.titulo }} - {{ l.autor }}</p>
+                        <p>Publicado em {{l.ano}}.</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Nenhum livro foi emprestado.</p>
+            {% endif %}
+        </div>
     </div>
 {% endif %}
 

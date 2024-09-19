@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Cookie&family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+:root{
+    --titulo: "Cookie", cursive;
+    --padrao: "Inria Sans", sans-serif;
+}
+
+
+body{
+    background-color: #F3F3F3;
+    margin: 0;
+}
+
+header{
+    background-color: #FE6D73;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+header h1{
+    margin: 0.6rem;
+    color: #242331;
+    font-family: var(--titulo);
+    font-size: 2.4rem;
+}
+
+header nav{
+    margin: 0.6rem;
+    align-self: center;
+}
+header nav a{
+    padding-right: 0.2rem;
+    text-decoration: none;
+    color: #242331;
+    font-family: var(--padrao);
+}
+main{
+    margin: 2rem;
+}

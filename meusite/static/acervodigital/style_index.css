@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Cookie&family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+:root{
+    --titulo: "Cookie", cursive;
+    --padrao: "Inria Sans", sans-serif;
+    --azul-escuro: #242331;
+}
+
+.formulario{
+    background-color: white;
+    border-radius: 10px;
+    width: 26rem;
+    padding: 1rem 2rem;
+}
+
+.formulario h1{
+    margin: 0;
+    font-family: var(--padrao);
+    color: var(--azul-escuro);
+}
+
+.formulario form label{
+    font-family: var(--padrao);
+    color: var(--azul-escuro);
+}
