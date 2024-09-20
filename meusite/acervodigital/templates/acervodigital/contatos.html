@@ -1,24 +1,32 @@
 {% extends 'acervodigital/base.html' %}
 {% load static %}
 
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'acervodigital/style_contatos.css'%}">
+{% endblock %}
+
 {% block conteudo %}
 
 {% if request.user.is_authenticated %}
-
-<form action="{% url 'contatos' %}" method="post">
-    {% csrf_token %}
-    {{ formulario }}
-    <input type="submit" value="Cadastrar contato">
-</form>
-
-<ul>
-    {% for c in contatos %}
-    <div>
-        <p>{{ c.nome }}</p>
-        <p>{{ c.email }}</p>
+<main>
+    <div class="formulario">
+        <h1>Adicionar contato</h1>
+        <form action="{% url 'contatos' %}" method="post">
+            {% csrf_token %}
+            {{ formulario }}
+            <input type="submit" value="Cadastrar contato" class="botao">
+        </form>
     </div>
+    <div class="contatos">
+    {% for c in contatos %}
+        <div>
+            <p class="nome">{{ c.nome }}</p>
+            <p>{{ c.email }}</p>
+        </div>
     {% endfor %}
-</ul>
+    </div>
+</main>
 
 {% endif %}
 

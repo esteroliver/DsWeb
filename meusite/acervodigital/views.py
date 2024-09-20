@@ -144,16 +144,27 @@ class EmprestimosView(View):
         livro.save()
         return redirect('/acervodigital/emprestimos')
 
+class RegistrarDevolucaoView(View):
+    def post(self, request, *args, **kwargs):
+        emprestimo_id = request.POST.get('emprestimo')
+        emprestimo = Emprestimo.objects.get(id=emprestimo_id)
+        emprestimo.devolvido = True
+        emprestimo.save()
 
+        livro = Livro.objects.get(id=emprestimo.livro.id)
+        livro.emprestado = False
+        livro.save()
 
+        return redirect('/acervodigital/emprestimos')
 
-
-
-
-
-
-
-
+class PesquisarView(View):
+    def get(self, request, *args, **kwargs):
+        pesquisa = request.GET.get('search', '')
+        livros = Livro.objects.filter(usuario=request.user, nome__icontains=pesquisa)
+        contexto = {
+            "livros": livros
+            }
+        return render(request, 'acervodigital/base.html')
 
 
 

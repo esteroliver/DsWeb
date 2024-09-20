@@ -1,41 +1,54 @@
 {% extends 'acervodigital/base.html' %}
 {% load static %}
 
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'acervodigital/style_emprestimos.css'%}">
+{% endblock %}
+
 {% block conteudo %}
 
 {% if request.user.is_authenticated %}
+<main>
+    <div class="formulario">
+        <h1>Fazer empréstimo</h1>
+        <form action="{% url 'emprestimos' %}" method='post'>
+            {% csrf_token %}
+            <select name='livro'>
+                <option>Selecione</option>
+                {% for l in livros %}
+                <option value='{{l.id}}'>{{l.titulo}} - {{l.autor}}</option>
+                {% endfor %}
+            </select>
 
-<h1>Fazer empréstimo</h1>
-<form action="{% url 'emprestimos' %}" method='post'>
-    {% csrf_token %}
-    <select name='livro'>
-        <option>Selecione</option>
-        {% for l in livros %}
-        <option value='{{l.id}}'>{{l.titulo}} - {{l.autor}}</option>
+            <select name='contato'>
+                <option>Selecione</option>
+                {% for c in contatos %}
+                <option value='{{c.id}}'>{{c.nome}}</option>
+                {% endfor %}
+            </select>
+
+            <input type='submit' value='Realizar empréstimo' class="botao">
+        </form>
+    </div>
+    <div class="emprestimos">
+        {% for e in emprestimos %}
+        <div>
+            <p class="nome">{{e.contato.nome}}</p>
+            <p>Pegou o livro "{{e.livro.titulo}}".</p>
+            {% if e.devolvido %}
+                <p>Devolvido.</p>
+            {% else %}
+                <p>Não devolvido.</p>
+            {% endif %}
+            <form action="{% url 'devolucao' %}" method='post'>
+                {% csrf_token %}
+                <input value="{{e.id}}" type="hidden" name="emprestimo">
+                <input type='submit' value='Registrar devolução' class="botao">
+            </form>
+        </div>
         {% endfor %}
-    </select>
-
-    <select name='contato'>
-        <option>Selecione</option>
-        {% for c in contatos %}
-        <option value='{{c.id}}'>{{c.nome}}</option>
-        {% endfor %}
-    </select>
-
-    <input type='submit' value='Realizar empréstimo'>
-</form>
-
-{% for e in emprestimos %}
-<div>
-    <p>{{e.contato.nome}}</p>
-    <p>{{e.livro.titulo}}</p>
-    {% if e.devolvido %}
-        <p>Devolvido.</p>
-    {% else %}
-        <p>Não devolvido.</p>
-    {% endif %}
-</div>
-{% endfor %}
+    </div>
+</main>
 
 {% endif %}
 

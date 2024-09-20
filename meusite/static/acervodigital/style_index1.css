@@ -6,11 +6,17 @@
     --azul-escuro: #242331;
 }
 
+main{
+    margin: 2rem;
+    display: flex;
+}
+
 .formulario{
     background-color: white;
     border-radius: 10px;
     width: 26rem;
     padding: 1rem 2rem;
+    height: 15rem;
 }
 
 .formulario h1{
@@ -20,6 +26,33 @@
 }
 
 .formulario form label{
+    font-family: var(--padrao);
+    color: var(--azul-escuro);
+}
+
+.formulario form input{
+    border-radius: 5px;
+    border: 1px solid #242331;
+}
+
+.formulario form .botao{
+    background-color: #242331;
+    color: white;
+    font-family: var(--padrao);
+    font-size: 1rem;
+}
+
+.conteudo{
+    margin-left: 3rem;
+}
+
+.conteudo h1{
+    font-family: var(--padrao);
+    color: var(--azul-escuro);
+    margin: 0;
+}
+
+.conteudo p{
     font-family: var(--padrao);
     color: var(--azul-escuro);
 }

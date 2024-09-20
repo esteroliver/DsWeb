@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static 'acervodigital/style_base.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'acervodigital/style_base1.css'%}">
     {% block head %}
     {% endblock %}
     <title>Minha Estante | {{request.user.username}}</title>
@@ -17,12 +17,15 @@
             <a href="{% url 'contatos' %}">Contatos</a>
             <a href="{% url 'emprestimos' %}">Empréstimos</a>
             <a href="{% url 'login' %}">Logout</a>
+            <form action="{% url 'pesquisar' %}" action="post">
+                {% csrf_token %}
+                <input type="text">
+                <input type="submit" value="Pesquisar" class="botao">
+            </form>
         </nav>
     </header>
 
-    <main>
     {% block conteudo %}
     {% endblock %}
-    </main>
 </body>
 </html>

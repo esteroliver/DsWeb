@@ -5,7 +5,6 @@
     --padrao: "Inria Sans", sans-serif;
 }
 
-
 body{
     background-color: #F3F3F3;
     margin: 0;
@@ -30,11 +29,18 @@ header nav{
     align-self: center;
 }
 header nav a{
-    padding-right: 0.2rem;
+    padding-right: 0.5rem;
     text-decoration: none;
     color: #242331;
     font-family: var(--padrao);
 }
-main{
-    margin: 2rem;
+header nav form input{
+    border-radius: 5px;
+    margin-top: 0.6rem;
+    border: 1px solid #242331;
+}
+header nav form .botao{
+    background-color: #242331;
+    color: white;
+    font-family: var(--padrao);
 }

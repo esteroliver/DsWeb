@@ -2,18 +2,19 @@
 {% load static %}
 
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{% static 'acervodigital/style_index.css'%}">
+<link rel="stylesheet" type="text/css" href="{% static 'acervodigital/style_index1.css'%}">
 {% endblock %}
 
 {% block conteudo %}
 
 {% if request.user.is_authenticated %}
+<main>
     <div class="formulario">
         <h1>Adicionar livro</h1>
         <form action="{% url 'index'%}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{formulario.as_p}}
-            <input type="submit" value="Cadastrar livro">
+            <input type="submit" value="Cadastrar livro" class="botao">
         </form>
     </div>
     <div class="conteudo">
@@ -47,6 +48,7 @@
             {% endif %}
         </div>
     </div>
+</main>
 {% endif %}
 
 {% endblock %}
